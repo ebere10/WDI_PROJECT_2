@@ -32,7 +32,7 @@ const hotels = [
 
 hotels.forEach((hotel, index) => {
   hotel.create(hotel(err, hotel) => {
-    if (err) return console.log(err)
+    if (err) return console.log(err);
     return console.log(`${hotel.name} was saved.`);
   });
-})
+});
