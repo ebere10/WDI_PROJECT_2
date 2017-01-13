@@ -39,8 +39,21 @@ const hotels = [
 ];
 
 hotels.forEach((hotel, index) => {
-  hotel.create(hotel(err, hotel) => {
+  Hotel.create(hotel(err, hotel) => {
     if (err) return console.log(err);
     return console.log(`${hotel.name} was saved.`);
   });
 });
+
+
+// const hotel1 = new Hotel({
+//   name: 'Best Hotel',
+//   lat: '51.5179441',
+//   lng: '-0.0896725',
+//   location: 'somewhere'
+// });
+//
+// hotel1.save(function(err, hotel) {
+//   if (err) return console.log(err);
+//   console.log(`${hotel.name} saved!`);
+// });

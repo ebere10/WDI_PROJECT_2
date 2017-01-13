@@ -1,9 +1,7 @@
 const express = require('express');
-const router = express.Router();
-
-const staticsController = require('../controllers/statics');
+const router  = express.Router();
 
 router.route('/')
-  .get(staticsController.home);
+.get(statics.home);
 
 module.exports = router;

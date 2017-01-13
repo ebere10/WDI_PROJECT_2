@@ -1,10 +1,15 @@
-const express = require('express');
-const router = express.Router();
+const express         = require('express');
+const router          = express.Router();
 
-const hotelsController = require('../controllers/hotels');
+const authentications = require('../controllers/authentications');
+const user            = require('../controllers/users');
 
-router.route('/hotels')
-  .get(hotelsController.index);
+router.route('/register')
+.post(authentications.register);
+router.route('/login')
+.post(authentications.login);
 
-//module exports
+router.route('/users')
+.get(users.index);
+
 module.exports = router;

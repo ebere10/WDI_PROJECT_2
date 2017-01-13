@@ -12,9 +12,6 @@ const apiRoutes  = require('./config/apiRoutes');
 const webRoutes  = require('./config/webRoutes');
 const config     = require('./config/config');
 
-const databaseURL = process.env.MONGOLAB_URL || 'mongodb://localhost:27017/quirky-hotels';
-mongoose.connect(databaseURL);
-
 app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
