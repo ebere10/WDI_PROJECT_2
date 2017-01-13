@@ -26,7 +26,15 @@ const hotels = [
     lat: '50.794790',
     lng: '-1.106087',
     type: 'Luxury hotel'
-
+  },
+  {
+    name: 'Palacio de Sal',
+    description: 'A hotel constructed entirely from salt… including the furniture.',
+    image: 'http://i.telegraph.co.uk/multimedia/archive/03303/Palacio_de_Sal_3303986b.jpg',
+    country: 'Uyuni, Bolivia',
+    lat: '-20.305199',
+    lng: '-66.974071',
+    type: 'Hotel'
   }
 ];
 
