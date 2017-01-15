@@ -1,32 +1,39 @@
 const express    = require('express');
-const mongoose   = require('mongoose');
-const cors       = require('cors');
 const morgan     = require('morgan');
-const expressJwt = require('express-jwt');
 const bodyParser = require('body-parser');
+const cors       = require('cors');
+const mongoose   = require('mongoose');
+const expressJWT = require('express-jwt');
 
 const app        = express();
-const port       = process.env.PORT || 3000;
-
-const apiRoutes  = require('./config/apiRoutes');
-const webRoutes  = require('./config/webRoutes');
 const config     = require('./config/config');
+const webRouter  = require('./config/webRoutes');
+const apiRouter  = require('./config/apiRoutes');
+
+mongoose.connect(config.db);
 
 app.use(morgan('dev'));
-app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('${__dirname}/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.static(`${__dirname}/public`));
 
-app.use('/api', expressJwt({secret: config.secret}))
-.unless({
-  path: [
-    {url: '/api/login', methods: ['POST']},
-    {url: '/api/register', methods: ['POST']}
-  ]
-});
+app.use('/api', expressJWT({ secret: config.secret })
+  .unless({
+    path: [
+      { url: '/api/register', methods: ['POST'] },
+      { url: '/api/login',    methods: ['POST'] },
+      { url: '/api/hotels',    methods: ['GET'] }
+    ]
+  }));
+app.use(jwtErrorHandler);
 
-app.use('/', webRoutes);
-app.use('/api', apiRoutes);
+function jwtErrorHandler(err, req, res, next){
+  if (err.name !== 'UnauthorizedError') return next();
+  return res.status(401).json({ message: 'Unauthorized request.' });
+}
 
-app.listen(port, console.log(`Server has stated on port: ${port}`));
+app.use('/api', apiRouter);
+app.use('/', webRouter);
+
+app.listen(config.port, () => console.log(`Express started on port: ${config.port}`));
