@@ -319,7 +319,7 @@ const hotels = [
     name: 'Magic Mountain Hotel',
     description: 'Hotel in a forest',
     image: 'http://i.telegraph.co.uk/multimedia/archive/03304/Magic-Mountain_3304043b.jpg',
-    country: ' ,Chile',
+    country: ' Chile',
     lat: '-39.869331',
     lng: '-71.918523',
     type: 'Hotel'

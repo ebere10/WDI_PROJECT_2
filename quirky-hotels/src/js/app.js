@@ -206,7 +206,8 @@ App.mapSetup = function() {
     zoom: 2,
     center: new google.maps.LatLng(51.506178,-0.088369),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"saturation":"42"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.text.fill","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+    styles:[{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"lightness":20},{"hue":"#00b3ff"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#e31b1b"},{"lightness":17},{"weight":1.2},{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"administrative.country","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"weight":"0"},{"visibility":"on"},{"color":"#ebebf0"}]},{"featureType":"landscape","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.terrain","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#ebebf0"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.attraction","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#ebebf0"}]},{"featureType":"poi.park","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi.place_of_worship","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f9ff53"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ecf500"},{"lightness":29},{"weight":0.2},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ebebf0"},{"lightness":18},{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ebebf0"},{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#ebebf0"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#85929e"},{"lightness":"98"}]}]
+
   };
 
   this.map = new google.maps.Map(canvas, mapOptions);
@@ -241,7 +242,7 @@ App.createMarkerForHotel = function(hotel) {
   const marker = new google.maps.Marker({
     position: latlng,
     map: this.map,
-    // icon: '/images/marker.png',
+    icon: 'http://wfarm1.dataknet.com/static/resources/icons/set101/cc0f6458.png',
     animation: google.maps.Animation.DROP
   });
 
@@ -250,10 +251,10 @@ App.createMarkerForHotel = function(hotel) {
 
 App.addInfoWindowForHotel = function(hotel, marker) {
   google.maps.event.addListener(marker, 'click', () => {
-    if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     console.log('open?');
+    if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
-      content: `<img src="${ hotel.image }"><p>${ hotel.name }</p>`
+      content: `<img src="${ hotel.image }"><h5>${ hotel.name }</h5><p>${ hotel.country }</p>`
     });
 
     this.infoWindow.open(this.map, marker);
@@ -261,16 +262,22 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     this.map.setZoom(15);
 
     // map zoom out on close of window
-    google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
-      // this.map.setCenter(marker.getPosition());
-      // this.map.setZoom(2);
-      console.log('close?');
-    });
+    // google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
+    //   // // this.map.setCenter(marker.getPosition());
+    //   // this.map.setZoom(2);
+    //   console.log('close?');
+    // });
   });
+  // google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
+  //   // // this.map.setCenter(marker.getPosition());
+  //   // this.map.setZoom(2);
+  //   console.log('close?');
+  // });
 };
-//function to zoom out when info window closes
-// google.maps.event.addListener(this.infoWindow,'closeclick',function(){
+// function to zoom out when info window closes - doesn't work!
+// google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
 //   this.map.setZoom(2);
+//   console.log('close?');
 // });
 
 $(App.init.bind(App));
