@@ -8,12 +8,12 @@ App.init = function() {
   this.$main  = $('main');
 //  this.$modal  = $('.modal-content');
 
-  // $('.register').on('click', this.register.bind(this));
-  // $('.login').on('click', this.login.bind(this));
-  // $('.logout').on('click', this.logout.bind(this));
+  $('.register').on('click', this.register.bind(this));
+  $('.login').on('click', this.login.bind(this));
+  $('.logout').on('click', this.logout.bind(this));
   $('.hotels').on('click', this.hotels.bind(this));
   // $('.usersIndex').on('click', this.usersIndex.bind(this));
-  //this.$main.on('submit', 'form', this.handleForm);
+  this.$main.on('submit', 'form', this.handleForm);
   if (this.getToken()) {
     this.loggedInState();
   } else {
@@ -24,6 +24,7 @@ App.init = function() {
 App.loggedInState = function(){
   $('.loggedIn').show();
   $('.loggedOut').hide();
+  this.hotels();
 };
 
 App.loggedOutState = function(){
@@ -33,46 +34,46 @@ App.loggedOutState = function(){
   this.hotels();
 };
 
-App.register = function(e) {
-  if (e)  e.preventDefault();
-
-  //this.$modal.html(`
-  $('.modal-content').html(`
-    <form method="post" action="/register">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <h4 class="modal-title">Login</h4>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <input class="form-control" type="text" name="user[username]" placeholder="Username">
-      </div>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <input class="form-control" type="email" name="user[email]" placeholder="Email">
-        </div>
-        </div>
-      <div class="modal-body">
-      <div class="form-group">
-  <input class="form-control" type="password" name="user[password]" placeholder="Password">
-      </div>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-                <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
-        </div>
-        </div>
-      <div class="modal-footer">
-      <input class="btn btn-primary" type="submit" value="Register">
-      </div>
-    </form>
-  `);
-  $('.modal-content').modal('show');
-};
-App.register2 = function(e){
+// App.register = function(e) {
+//   if (e)  e.preventDefault();
+//
+//   //this.$modal.html(`
+//   $('.modal-content').html(`
+//     <form method="post" action="/register">
+//     <div class="modal-header">
+//       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//         <span aria-hidden="true">&times;</span>
+//       </button>
+//       <h4 class="modal-title">Login</h4>
+//     </div>
+//     <div class="modal-body">
+//       <div class="form-group">
+//         <input class="form-control" type="text" name="user[username]" placeholder="Username">
+//       </div>
+//       </div>
+//       <div class="modal-body">
+//         <div class="form-group">
+//           <input class="form-control" type="email" name="user[email]" placeholder="Email">
+//         </div>
+//         </div>
+//       <div class="modal-body">
+//       <div class="form-group">
+//   <input class="form-control" type="password" name="user[password]" placeholder="Password">
+//       </div>
+//       </div>
+//       <div class="modal-body">
+//         <div class="form-group">
+//                 <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
+//         </div>
+//         </div>
+//       <div class="modal-footer">
+//       <input class="btn btn-primary" type="submit" value="Register">
+//       </div>
+//     </form>
+//   `);
+//   $('.modal-content').modal('show');
+// };
+App.register = function(e){
   if (e) e.preventDefault();
   this.$main.html(`
     <h2>Register</h2>
@@ -98,41 +99,57 @@ App.hotels = function(e) {
   console.log('all hotels');
   if (e)  e.preventDefault();
   this.$main.html(`
-    <h2>All Hotels</h2>
+    <h2>All the Hotels</h2>
     <div id="map-canvas"></div>
   `);
   this.mapSetup();
 };
 
 App.login = function(e) {
-  if (e) e.preventDefault();
-
-  //this.$modal.html(`
-  $('.modal-content').html(`
+  e.preventDefault();
+  this.$main.html(`
+    <h2>Login</h2>
     <form method="post" action="/login">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <h4 class="modal-title">Login</h4>
+    <div class="form-group">
+      <input class="form-control" type="email" name="email" placeholder="Email">
     </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <input class="form-control" type="email" name="email" placeholder="Email">
-      </div>
-      </div>
-      <div class="modal-body">
-      <div class="form-group">
-        <input class="form-control" type="password" name="password" placeholder="Password">
-      </div>
-      </div>
-      <div class="modal-footer">
+    <div class="form-group">
+      <input class="form-control" type="password" name="password" placeholder="Password">
+    </div>
       <input class="btn btn-primary" type="submit" value="Login">
-      </div>
     </form>
-  `);
-  $('.modal-content').modal('show');
+    `);
 };
+
+// App.login = function(e) {
+//   if (e) e.preventDefault();
+//
+//   //this.$modal.html(`
+//   $('.modal-content').html(`
+//     <form method="post" action="/login">
+//     <div class="modal-header">
+//       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//         <span aria-hidden="true">&times;</span>
+//       </button>
+//       <h4 class="modal-title">Login</h4>
+//     </div>
+//     <div class="modal-body">
+//       <div class="form-group">
+//         <input class="form-control" type="email" name="email" placeholder="Email">
+//       </div>
+//       </div>
+//       <div class="modal-body">
+//       <div class="form-group">
+//         <input class="form-control" type="password" name="password" placeholder="Password">
+//       </div>
+//       </div>
+//       <div class="modal-footer">
+//       <input class="btn btn-primary" type="submit" value="Login">
+//       </div>
+//     </form>
+//   `);
+//   $('.modal-content').modal('show');
+// };
 
 App.logout = function(e){
   e.preventDefault();
@@ -186,9 +203,10 @@ App.mapSetup = function() {
   const canvas = document.getElementById('map-canvas');
 
   const mapOptions = {
-    zoom: 12,
+    zoom: 2,
     center: new google.maps.LatLng(51.506178,-0.088369),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"saturation":"42"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"labels.text.fill","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
   };
 
   this.map = new google.maps.Map(canvas, mapOptions);
@@ -196,9 +214,9 @@ App.mapSetup = function() {
 };
 
 App.loopThroughHotels = function(data) {
-      console.log(data);
+  console.log(data);
   $.each(data, (index, hotel) => {
-      console.log('loopThroughHotels');
+    console.log('loopThroughHotels');
     setTimeout(() => {
       App.createMarkerForHotel(hotel);
     }, index * 50);
@@ -228,22 +246,31 @@ App.createMarkerForHotel = function(hotel) {
   });
 
   this.addInfoWindowForHotel(hotel, marker);
-
 };
 
-App.addInfoWindowForHotel = function(camera, marker) {
+App.addInfoWindowForHotel = function(hotel, marker) {
   google.maps.event.addListener(marker, 'click', () => {
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
-
+    console.log('open?');
     this.infoWindow = new google.maps.InfoWindow({
-      content: `<img src="${ camera.image }"><p>${ camera.name }</p>`
+      content: `<img src="${ hotel.image }"><p>${ hotel.name }</p>`
     });
 
     this.infoWindow.open(this.map, marker);
     this.map.setCenter(marker.getPosition());
     this.map.setZoom(15);
+
+    // map zoom out on close of window
+    google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
+      // this.map.setCenter(marker.getPosition());
+      // this.map.setZoom(2);
+      console.log('close?');
+    });
   });
 };
-
+//function to zoom out when info window closes
+// google.maps.event.addListener(this.infoWindow,'closeclick',function(){
+//   this.map.setZoom(2);
+// });
 
 $(App.init.bind(App));

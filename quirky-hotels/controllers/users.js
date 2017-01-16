@@ -31,15 +31,9 @@ function usersDelete(req, res) {
   });
 }
 
-
-
-
-
-
-
 module.exports = {
-  index:  usersIndex,
-  show:   usersShow,
+  index: usersIndex,
+  show: usersShow,
   update: usersUpdate,
   delete: usersDelete
 };
