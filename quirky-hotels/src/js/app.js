@@ -8,6 +8,7 @@ App.init = function() {
   this.$main  = $('main');
 //  this.$modal  = $('.modal-content');
 
+  $('.home').on('click', this.home.bind(this));
   $('.register').on('click', this.register.bind(this));
   $('.login').on('click', this.login.bind(this));
   $('.logout').on('click', this.logout.bind(this));
@@ -93,6 +94,15 @@ App.register = function(e){
       <input class="btn btn-primary" type="submit" value="Register">
     </form>
   `);
+};
+
+App.home = function(e) {
+  console.log('home');
+  if (e)  e.preventDefault();
+  this.$main.html(`
+    <h2>home?</h2>
+  `);
+  this.mapSetup();
 };
 
 App.hotels = function(e) {
