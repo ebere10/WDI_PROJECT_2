@@ -1,5 +1,6 @@
 
 body {
+  background-color: #fdfdfe;
   margin: 0;
 }
 
@@ -15,12 +16,22 @@ body {
 
 //navbar
 .bg-faded {
-    background-color: rgba(81, 158, 51, 0.24);
+    background-color: #ebebf0;
+}
+
+//
+.navbar-light .navbar-brand {
+    color: #bb1d5e;
+}
+
+//logout/login
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(198, 9, 9, 0.99);
 }
 
 // @media (min-width: 1200px)
 .container {
-    max-width: 1443px;
+    max-width: 1100px;
     padding: 0;
 }
 
