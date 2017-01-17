@@ -103,14 +103,20 @@ App.register = function(e) {
 //   // this.mapSetup();
 // };
 
+// App.landing = function(){
+//   this.$main.html(`
+//     <h1>Stay Quirky</h1>
+//     <div class="frame"><img src="https://cdn3.vox-cdn.com/uploads/chorus_asset/file/6857711/Hut4.jpg" class="innerpic"></div>
+//     <p>The web app for unusual hotels around the world<p>
+//     `);
+// };
+
 App.landing = function(){
-  // $('header h1').hide();
   this.$main.html(`
     <h1>Stay Quirky</h1>
-    <p><img src="http://www.uniqhotels.com/media/hotels/28/53fa98-eaf7-4bdb-ab36-c95d63073f6e.jpeg"></p>
+    <h3></h3>
     <p>The web app for unusual hotels around the world<p>
     `);
-  console.log('You clicked');
 };
 
 App.hotels = function(e) {
