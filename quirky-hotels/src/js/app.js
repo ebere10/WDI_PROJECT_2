@@ -9,7 +9,7 @@ App.init = function() {
   // this.$body = $('body');//delete
   // this.$modal  = $('.modal-content');
 
-  $('.landing').on('click', this.landing.bind(this));
+  // $('.landing').on('click', this.landing.bind(this));
   $('.register').on('click', this.register.bind(this));
   $('.login').on('click', this.login.bind(this));
   $('.logout').on('click', this.logout.bind(this));
@@ -61,7 +61,7 @@ App.register = function(e) {
       <div class="form-group">
        <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
       </div>
-      
+
 
       </div>
       <div class="modal-footer">
@@ -94,13 +94,23 @@ App.register = function(e) {
 //   `);
 // };
 
-App.landing = function(e) {
-  console.log('landing');
-  if (e)  e.preventDefault();
+// App.landing = function(e) {
+//   console.log('landing');
+//   if (e)  e.preventDefault();
+//   this.$main.html(`
+//     <div id="landing"></div>
+//   `);
+//   // this.mapSetup();
+// };
+
+App.landing = function(){
+  // $('header h1').hide();
   this.$main.html(`
-    <div id="landing"></div>
-  `);
-  // this.mapSetup();
+    <h1>Stay Quirky</h1>
+    <p><img src="http://www.uniqhotels.com/media/hotels/28/53fa98-eaf7-4bdb-ab36-c95d63073f6e.jpeg"></p>
+    <p>The web app for unusual hotels around the world<p>
+    `);
+  console.log('You clicked');
 };
 
 App.hotels = function(e) {
