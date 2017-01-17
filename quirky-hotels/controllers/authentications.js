@@ -4,6 +4,7 @@ const jwt    = require('jsonwebtoken');
 const config = require('../config/config');
 
 function authenticationsRegister(req, res) {
+  console.log('register');
   User.create((req.body.user), (err, user) => {
     if (err) return res.status(500).json({ message: 'Oh no something went wrong'});
 
@@ -18,6 +19,7 @@ function authenticationsRegister(req, res) {
 }
 
 function authenticationsLogin(req, res) {
+  console.log('login');
   User.findOne({ email: req.body.email}, (err, user) => {
     if (err) return res.status(500).json({ message: 'Oh no something went  wrong'});
     if (!user || !user.validatePassword(req.body.password)) {

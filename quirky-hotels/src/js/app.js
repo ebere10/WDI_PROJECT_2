@@ -15,7 +15,7 @@ App.init = function() {
   $('.logout').on('click', this.logout.bind(this));
   $('.hotels').on('click', this.hotels.bind(this));
   // $('.usersIndex').on('click', this.usersIndex.bind(this));
-  this.$main.on('submit', 'form', this.handleForm);//**********CHANGE FOR MODAL***********
+  $('body').on('submit', 'form', this.handleForm);//**********CHANGE FOR MODAL***********
   // this.$body.on('submit', 'form', this.handleForm);//delete
   if (this.getToken()) {
     this.loggedInState();
@@ -64,23 +64,26 @@ App.landing = function(e) {
   console.log('landing');
   if (e)  e.preventDefault();
   this.$main.html(`
-    <h5>?</h5>
+    <div id="landing"></div>
   `);
-  this.mapSetup();
+  // this.mapSetup();
 };
 
 App.hotels = function(e) {
   console.log('all hotels');
+
   if (e)  e.preventDefault();
+  // $('.modal').modal('hide');
   this.$main.html(`
     <div id="map-canvas"></div>
   `);
+
   this.mapSetup();
 };
 
 
 App.login = function(e) {
-  e.preventDefault();
+  if (e) e.preventDefault();
 
   $('.modal-content').html(`
     <form method="post" action="/login">
@@ -129,6 +132,8 @@ App.logout = function(e){
 };
 
 App.handleForm = function(e){
+  // Check if one is open?
+  $('.modal').modal('hide');
 
   console.log('handleForm');
   e.preventDefault();
@@ -198,7 +203,7 @@ App.loopThroughHotels = function(data) {
 
 
 App.getHotels = function() {
-  $.get(`${this.apiUrl}/hotels`).done(this.loopThroughHotels);
+  this.ajaxRequest(`${this.apiUrl}/hotels`, 'GET', null, this.loopThroughHotels);
 };
 
 
