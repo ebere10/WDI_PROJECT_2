@@ -5,7 +5,8 @@ const google = google;
 
 App.init = function() {
   this.apiUrl = 'http://localhost:3000/api';
-  this.$main  = $('main');//**********CHANGE FOR MODAL***********
+  this.$main = $('main');//**********CHANGE FOR MODAL***********
+  // this.$body = $('body');//delete
   // this.$modal  = $('.modal-content');
 
   $('.landing').on('click', this.landing.bind(this));
@@ -15,6 +16,7 @@ App.init = function() {
   $('.hotels').on('click', this.hotels.bind(this));
   // $('.usersIndex').on('click', this.usersIndex.bind(this));
   this.$main.on('submit', 'form', this.handleForm);//**********CHANGE FOR MODAL***********
+  // this.$body.on('submit', 'form', this.handleForm);//delete
   if (this.getToken()) {
     this.loggedInState();
   } else {
@@ -97,7 +99,7 @@ App.login = function(e) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </div>
     </form>`);
 
@@ -223,6 +225,7 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     console.log('open?');
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
+      // maxWidth: 300,
       content: `<img src="${ hotel.image }"><h4>${ hotel.name }</h4><p>${ hotel.country }</p><p>${ hotel.description }</p>`
     });
 
@@ -235,7 +238,7 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     // map.fitBounds(this.map.bounds);
     // zoomChangeBoundsListener =
 
-    google.maps.event.addListenerOnce(App.map, 'bounds_changed', function(event) {
+    google.maps.event.addListenerOnce(App.map, 'bounds_changed', function() {
       if (this.getZoom()){
         this.setZoom(16);
       }
@@ -243,24 +246,13 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     console.log(this.infoWindow);
     google.maps.event.addListener(App.infoWindow,'closeclick',function(){
       App.map.setCenter(marker.getPosition());
+      // App.map.setCenter(mapOptions.getPosition());
       App.map.setZoom(2);
       // console.log('close?');
     });
-    // setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);
 
-    // map zoom out on close of window
   });
-
-  // google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
-  //   // // this.map.setCenter(marker.getPosition());
-  //   // this.map.setZoom(2);
-  //   console.log('close?');
-  // });
 };
-// function to zoom out when info window closes - doesn't work!
-// google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
-//   this.map.setZoom(2);
-//   console.log('close?');
-// });
+
 
 $(App.init.bind(App));
