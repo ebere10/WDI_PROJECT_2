@@ -34,7 +34,8 @@ App.loggedOutState = function(){
   $('.loggedIn').hide();
   $('.loggedOut').show();
   //this.register();
-  this.hotels();
+  // this.hotels(); //add back in if below doesn't work
+  this.landing();
 };
 
 App.register = function(e){
@@ -226,7 +227,7 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
       // maxWidth: 300,
-      content: `<img src="${ hotel.image }"><h4>${ hotel.name }</h4><p>${ hotel.country }</p><p>${ hotel.description }</p>`
+      content: `<h4>${ hotel.name }</h4><img src="${ hotel.image }"><p>${ hotel.country }</p><p>${ hotel.description }</p>`
     });
 
     this.infoWindow.open(this.map, marker);
