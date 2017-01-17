@@ -38,27 +38,61 @@ App.loggedOutState = function(){
   this.landing();
 };
 
-App.register = function(e){
+App.register = function(e) {
   if (e) e.preventDefault();
-  this.$main.html(`
-    <h2>Register</h2>
+
+  $('.modal-content').html(`
     <form method="post" action="/register">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body">
+
       <div class="form-group">
         <input class="form-control" type="text" name="user[username]" placeholder="Username">
       </div>
       <div class="form-group">
-        <input class="form-control" type="email" name="user[email]" placeholder="Email">
+       <input class="form-control" type="email" name="user[email]" placeholder="Email">
       </div>
       <div class="form-group">
         <input class="form-control" type="password" name="user[password]" placeholder="Password">
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
+       <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
       </div>
-      <input class="btn btn-primary" type="submit" value="Register">
-    </form>
-  `);
+      
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>`);
+
+  $('.modal').modal('show');
 };
+// App.register = function(e){
+//   if (e) e.preventDefault();
+//   this.$main.html(`
+//     <h2>Register</h2>
+//     <form method="post" action="/register">
+//       <div class="form-group">
+//         <input class="form-control" type="text" name="user[username]" placeholder="Username">
+//       </div>
+//       <div class="form-group">
+//         <input class="form-control" type="email" name="user[email]" placeholder="Email">
+//       </div>
+//       <div class="form-group">
+//         <input class="form-control" type="password" name="user[password]" placeholder="Password">
+//       </div>
+//       <div class="form-group">
+//         <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
+//       </div>
+//       <input class="btn btn-primary" type="submit" value="Register">
+//     </form>
+//   `);
+// };
 
 App.landing = function(e) {
   console.log('landing');
