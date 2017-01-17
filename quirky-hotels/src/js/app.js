@@ -6,7 +6,7 @@ const google = google;
 App.init = function() {
   this.apiUrl = 'http://localhost:3000/api';
   this.$main  = $('main');//**********CHANGE FOR MODAL***********
-//  this.$modal  = $('.modal-content');
+  // this.$modal  = $('.modal-content');
 
   $('.landing').on('click', this.landing.bind(this));
   $('.register').on('click', this.register.bind(this));
@@ -35,45 +35,6 @@ App.loggedOutState = function(){
   this.hotels();
 };
 
-// App.register = function(e) {
-//   if (e)  e.preventDefault();
-//
-//   //this.$modal.html(`
-//   $('.modal-content').html(`
-//     <form method="post" action="/register">
-//     <div class="modal-header">
-//       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//         <span aria-hidden="true">&times;</span>
-//       </button>
-//       <h4 class="modal-title">Login</h4>
-//     </div>
-//     <div class="modal-body">
-//       <div class="form-group">
-//         <input class="form-control" type="text" name="user[username]" placeholder="Username">
-//       </div>
-//       </div>
-//       <div class="modal-body">
-//         <div class="form-group">
-//           <input class="form-control" type="email" name="user[email]" placeholder="Email">
-//         </div>
-//         </div>
-//       <div class="modal-body">
-//       <div class="form-group">
-//   <input class="form-control" type="password" name="user[password]" placeholder="Password">
-//       </div>
-//       </div>
-//       <div class="modal-body">
-//         <div class="form-group">
-//                 <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
-//         </div>
-//         </div>
-//       <div class="modal-footer">
-//       <input class="btn btn-primary" type="submit" value="Register">
-//       </div>
-//     </form>
-//   `);
-//   $('.modal-content').modal('show');
-// };
 App.register = function(e){
   if (e) e.preventDefault();
   this.$main.html(`
@@ -100,7 +61,7 @@ App.landing = function(e) {
   console.log('landing');
   if (e)  e.preventDefault();
   this.$main.html(`
-    <h2>landing?</h2>
+    <h5>?</h5>
   `);
   this.mapSetup();
 };
@@ -114,50 +75,48 @@ App.hotels = function(e) {
   this.mapSetup();
 };
 
+
 App.login = function(e) {
   e.preventDefault();
-  this.$main.html(`
-    <h2>Login</h2>
-    <form method="post" action="/login">
-    <div class="form-group">
-      <input class="form-control" type="email" name="email" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <input class="form-control" type="password" name="password" placeholder="Password">
-    </div>
-      <input class="btn btn-primary" type="submit" value="Login">
-    </form>
-    `);
-};
 
+  $('.modal-content').html(`
+    <form method="post" action="/login">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <input class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>`);
+
+  $('.modal').modal('show');
+};
 // App.login = function(e) {
-//   if (e) e.preventDefault();
-//
-//   //this.$modal.html(`
-//   $('.modal-content').html(`
+//   e.preventDefault();
+//   this.$main.html(`
+//     <h2>Login</h2>
 //     <form method="post" action="/login">
-//     <div class="modal-header">
-//       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//         <span aria-hidden="true">&times;</span>
-//       </button>
-//       <h4 class="modal-title">Login</h4>
+//     <div class="form-group">
+//       <input class="form-control" type="email" name="email" placeholder="Email">
 //     </div>
-//     <div class="modal-body">
-//       <div class="form-group">
-//         <input class="form-control" type="email" name="email" placeholder="Email">
-//       </div>
-//       </div>
-//       <div class="modal-body">
-//       <div class="form-group">
-//         <input class="form-control" type="password" name="password" placeholder="Password">
-//       </div>
-//       </div>
-//       <div class="modal-footer">
+//     <div class="form-group">
+//       <input class="form-control" type="password" name="password" placeholder="Password">
+//     </div>
 //       <input class="btn btn-primary" type="submit" value="Login">
-//       </div>
 //     </form>
-//   `);
-//   $('.modal-content').modal('show');
+//     `);
 // };
 
 App.logout = function(e){
@@ -271,13 +230,27 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     this.map.setCenter(marker.getPosition());
     this.map.setZoom(8);
 
+    // map = this.map.map;
+    //
+    // map.fitBounds(this.map.bounds);
+    // zoomChangeBoundsListener =
+
+    google.maps.event.addListenerOnce(App.map, 'bounds_changed', function(event) {
+      if (this.getZoom()){
+        this.setZoom(16);
+      }
+    });
+    console.log(this.infoWindow);
+    google.maps.event.addListener(App.infoWindow,'closeclick',function(){
+      App.map.setCenter(marker.getPosition());
+      App.map.setZoom(2);
+      // console.log('close?');
+    });
+    // setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);
+
     // map zoom out on close of window
-    // google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
-    //   // // this.map.setCenter(marker.getPosition());
-    //   // this.map.setZoom(2);
-    //   console.log('close?');
-    // });
   });
+
   // google.maps.event.addListener(App.addInfoWindowForHotel,'closeclick',function(){
   //   // // this.map.setCenter(marker.getPosition());
   //   // this.map.setZoom(2);
