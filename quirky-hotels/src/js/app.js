@@ -5,16 +5,16 @@ const google = google;
 
 App.init = function() {
   this.apiUrl = 'http://localhost:3000/api';
-  this.$main  = $('main');
+  this.$main  = $('main');//**********CHANGE FOR MODAL***********
 //  this.$modal  = $('.modal-content');
 
-  $('.home').on('click', this.home.bind(this));
+  $('.landing').on('click', this.landing.bind(this));
   $('.register').on('click', this.register.bind(this));
   $('.login').on('click', this.login.bind(this));
   $('.logout').on('click', this.logout.bind(this));
   $('.hotels').on('click', this.hotels.bind(this));
   // $('.usersIndex').on('click', this.usersIndex.bind(this));
-  this.$main.on('submit', 'form', this.handleForm);
+  this.$main.on('submit', 'form', this.handleForm);//**********CHANGE FOR MODAL***********
   if (this.getToken()) {
     this.loggedInState();
   } else {
@@ -96,11 +96,11 @@ App.register = function(e){
   `);
 };
 
-App.home = function(e) {
-  console.log('home');
+App.landing = function(e) {
+  console.log('landing');
   if (e)  e.preventDefault();
   this.$main.html(`
-    <h2>home?</h2>
+    <h2>landing?</h2>
   `);
   this.mapSetup();
 };
