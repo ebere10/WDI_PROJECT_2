@@ -1,6 +1,6 @@
 const App = App || {};
 const google = google;
-// const Hotel = require('../models/hotel');
+// const Hotel = require('../models/hotel'); 
 
 
 App.init = function() {
