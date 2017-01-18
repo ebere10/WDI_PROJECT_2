@@ -5,18 +5,13 @@ const google = google;
 
 App.init = function() {
   this.apiUrl = 'http://localhost:3000/api';
-  this.$main = $('main');//**********CHANGE FOR MODAL***********
-  // this.$body = $('body');//delete
-  // this.$modal  = $('.modal-content');
+  this.$main = $('main');
 
-  // $('.landing').on('click', this.landing.bind(this));
   $('.register').on('click', this.register.bind(this));
   $('.login').on('click', this.login.bind(this));
   $('.logout').on('click', this.logout.bind(this));
   $('.hotels').on('click', this.hotels.bind(this));
-  // $('.usersIndex').on('click', this.usersIndex.bind(this));
-  $('body').on('submit', 'form', this.handleForm);//**********CHANGE FOR MODAL***********
-  // this.$body.on('submit', 'form', this.handleForm);//delete
+  $('body').on('submit', 'form', this.handleForm);
   if (this.getToken()) {
     this.loggedInState();
   } else {
@@ -72,50 +67,12 @@ App.register = function(e) {
 
   $('.modal').modal('show');
 };
-// App.register = function(e){
-//   if (e) e.preventDefault();
-//   this.$main.html(`
-//     <h2>Register</h2>
-//     <form method="post" action="/register">
-//       <div class="form-group">
-//         <input class="form-control" type="text" name="user[username]" placeholder="Username">
-//       </div>
-//       <div class="form-group">
-//         <input class="form-control" type="email" name="user[email]" placeholder="Email">
-//       </div>
-//       <div class="form-group">
-//         <input class="form-control" type="password" name="user[password]" placeholder="Password">
-//       </div>
-//       <div class="form-group">
-//         <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
-//       </div>
-//       <input class="btn btn-primary" type="submit" value="Register">
-//     </form>
-//   `);
-// };
-
-// App.landing = function(e) {
-//   console.log('landing');
-//   if (e)  e.preventDefault();
-//   this.$main.html(`
-//     <div id="landing"></div>
-//   `);
-//   // this.mapSetup();
-// };
-
-// App.landing = function(){
-//   this.$main.html(`
-//     <h1>Stay Quirky</h1>
-//     <div class="frame"><img src="https://cdn3.vox-cdn.com/uploads/chorus_asset/file/6857711/Hut4.jpg" class="innerpic"></div>
-//     <p>The web app for unusual hotels around the world<p>
-//     `);
-// };
 
 App.landing = function(){
   this.$main.html(`
     <h1>Stay Quirky</h1>
     <h3></h3>
-    <h6>The web app for unusual hotels around the world</h6>
+    <h6>The website for unusual hotels around the world</h6>
     `);
 };
 
@@ -123,11 +80,9 @@ App.hotels = function(e) {
   console.log('all hotels');
 
   if (e)  e.preventDefault();
-  // $('.modal').modal('hide');
   this.$main.html(`
     <div id="map-canvas"></div>
   `);
-
   this.mapSetup();
 };
 
@@ -159,21 +114,6 @@ App.login = function(e) {
 
   $('.modal').modal('show');
 };
-// App.login = function(e) {
-//   e.preventDefault();
-//   this.$main.html(`
-//     <h2>Login</h2>
-//     <form method="post" action="/login">
-//     <div class="form-group">
-//       <input class="form-control" type="email" name="email" placeholder="Email">
-//     </div>
-//     <div class="form-group">
-//       <input class="form-control" type="password" name="password" placeholder="Password">
-//     </div>
-//       <input class="btn btn-primary" type="submit" value="Login">
-//     </form>
-//     `);
-// };
 
 App.logout = function(e){
   e.preventDefault();
@@ -230,7 +170,6 @@ App.mapSetup = function() {
 
   const mapOptions = {
     zoom: 2,
-    // 51.506178,-0.088369
     center: new google.maps.LatLng(29.158613, 12.066755),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     styles:[{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#747474"},{"lightness":"23"}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"color":"#f38eb0"}]},{"featureType":"poi.government","elementType":"geometry.fill","stylers":[{"color":"#ced7db"}]},{"featureType":"poi.medical","elementType":"geometry.fill","stylers":[{"color":"#ffa5a8"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#c7e5c8"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"color":"#d6cbc7"}]},{"featureType":"poi.school","elementType":"geometry.fill","stylers":[{"color":"#c4c9e8"}]},{"featureType":"poi.sports_complex","elementType":"geometry.fill","stylers":[{"color":"#b1eaf1"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":"100"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"},{"lightness":"100"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffd4a5"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffe9d2"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"weight":"3.00"}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"weight":"0.30"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#747474"},{"lightness":"36"}]},{"featureType":"road.local","elementType":"labels.text.stroke","stylers":[{"color":"#e9e5dc"},{"lightness":"30"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":"100"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#d2e7f7"}]}]
@@ -256,13 +195,6 @@ App.getHotels = function() {
   this.ajaxRequest(`${this.apiUrl}/hotels`, 'GET', null, this.loopThroughHotels);
 };
 
-
-//
-// Hotel.find({}, (err, hotel) => {
-//   if (err) return res.status(500).json(err);
-//   if (!hotel) return res.status(404).json({ error: 'No hotel was found.' });
-//   return res.status(200).json(hotel);
-// });
 App.createMarkerForHotel = function(hotel) {
   console.log('marker creation');
   const latlng = new google.maps.LatLng(hotel.lat, hotel.lng);
@@ -281,7 +213,6 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     console.log('open?');
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
-      // maxWidth: 300,
       content: `<h4>${ hotel.name }</h4><img src="${ hotel.image }"><p>${ hotel.country }</p><p>${ hotel.description }</p>`
     });
 
@@ -289,22 +220,10 @@ App.addInfoWindowForHotel = function(hotel, marker) {
     this.map.setCenter(marker.getPosition());
     this.map.setZoom(8);
 
-    // map = this.map.map;
-    //
-    // map.fitBounds(this.map.bounds);
-    // zoomChangeBoundsListener =
-
-    google.maps.event.addListenerOnce(App.map, 'bounds_changed', function() {
-      if (this.getZoom()){
-        this.setZoom(16);
-      }
-    });
     console.log(this.infoWindow);
     google.maps.event.addListener(App.infoWindow,'closeclick',function(){
       App.map.setCenter(marker.getPosition());
-      // App.map.setCenter(mapOptions.getPosition());
       App.map.setZoom(2);
-      // console.log('close?');
     });
 
   });
