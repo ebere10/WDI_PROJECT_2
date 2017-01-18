@@ -28,8 +28,6 @@ App.loggedInState = function(){
 App.loggedOutState = function(){
   $('.loggedIn').hide();
   $('.loggedOut').show();
-  //this.register();
-  // this.hotels(); //add back in if below doesn't work
   this.landing();
 };
 

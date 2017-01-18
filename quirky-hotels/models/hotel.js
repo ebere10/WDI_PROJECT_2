@@ -7,8 +7,7 @@ const hotelSchema = mongoose.Schema({
   country: String,
   lat: String,
   lng: String,
-  type: String,
-  website: String
+  type: String
 });
 
 module.exports = mongoose.model('Hotel', hotelSchema);
