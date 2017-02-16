@@ -1,4 +1,4 @@
-# WDI_PROJECT_2
+# STAY QUIRKY
 
 This is my second project from my web development immersive course at General Assembly.
 
