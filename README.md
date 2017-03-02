@@ -2,8 +2,8 @@
 
 This is my second project from my web development immersive course at General Assembly.
 
-For this project I used the Google maps Api and I seeded my own data.
-I created a website called Stay Quirky where users can select a pin on a map and view unusual and offbeat hotels around the world.
+For this project I used the Google maps API and I seeded my own data on hotels.
+I created a website called Stay Quirky where users can register and login. Users can select a pin on a map and view unusual and offbeat hotels around the world.
 
 The landing page
 
@@ -19,7 +19,7 @@ When logged in you're directed to the map.
 
 Info window appears when pins are clicked on and map zooms in to location. When the info window is closed, the map zooms back out.
 
-![info window](https://cloud.githubusercontent.com/assets/22101072/22060609/65ebb2ea-dd69-11e6-9c65-afb8bc00ed14.png)
+![hotel-info](https://cloud.githubusercontent.com/assets/22101072/23522427/def3d932-ff7a-11e6-9223-af159902c83d.png)
 
 
 **What went well**
